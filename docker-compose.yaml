@@ -1,0 +1,50 @@
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+  elasticsearch:
+    image: elasticsearch:8.16.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--save", "", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.16.1
+    container_name: filebeat
+    user: root
+    command: ["filebeat", "-e", "--strict.perms=false"]
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./db.csv:/usr/share/filebeat/db.csv:ro
+      - ./filebeat/convert_csv_to_json.js:/usr/share/filebeat/convert_csv_to_json.js:ro
+    depends_on:
+      - redis
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+
+volumes:
+  elasticsearch-data: {}
+  grafana-data: {}
+  redis-data: {}

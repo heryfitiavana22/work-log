@@ -1,0 +1,31 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - ./db.csv
+    close_eof: true
+
+    processors:
+      - decode_csv_fields:
+          fields:
+            message: decoded_csv_arr
+          separator: ","
+          ignore_missing: false
+          overwrite_keys: true
+          trim_leading_space: false
+          fail_on_error: true
+
+      - script:
+          lang: javascript
+          id: convert_csv_into_json
+          file: ./convert_csv_to_json.js
+
+output.redis:
+  hosts: ["redis:6379"]
+  key: "logs-channel"
+  datatype: "channel"
+  codec.json:
+    pretty: false
+
+setup.ilm.enabled: false
+setup.template.enabled: false
