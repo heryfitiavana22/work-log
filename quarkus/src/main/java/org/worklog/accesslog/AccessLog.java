@@ -3,11 +3,17 @@ package org.worklog.accesslog;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AccessLog {
     private Long id;
+    @JsonProperty("card_id")
     private String cardId;
+    @JsonProperty("device_id")
     private String deviceId;
+    @JsonProperty("employee_id")
     private String employeeId;
+    @JsonProperty("employee_id")
     private String employeeName;
     private LocalDate date;
     private LocalTime time;
