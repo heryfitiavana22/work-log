@@ -1,4 +1,4 @@
-id,card_id,device_id,employee_id,employee_name,date,heure,type
+id,card_id,device_id,employee_id,employee_name,date,time,type
 1,C12345,D001,E001,Alice,2025-02-15,08:30,entry
 2,C67890,D002,E002,Bob,2025-02-15,08:45,entry
 3,C12345,D001,E001,Alice,2025-02-15,17:00,exit
