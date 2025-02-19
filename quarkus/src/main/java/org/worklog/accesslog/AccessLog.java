@@ -3,8 +3,13 @@ package org.worklog.accesslog;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.SearchEntity;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@SearchEntity
+@Indexed
 public class AccessLog {
     private Long id;
     @JsonProperty("card_id")
