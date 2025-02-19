@@ -6,10 +6,16 @@ import org.worklog.filebeat.FilebeatData;
 
 import io.quarkus.redis.datasource.RedisDataSource;
 import io.quarkus.redis.datasource.pubsub.PubSubCommands;
+import io.quarkus.runtime.Startup;
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.infrastructure.Infrastructure;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
+@Startup
+@Blocking
 public class RedisSubscriber implements Consumer<FilebeatData> {
     private final PubSubCommands<FilebeatData> pub;
     private final PubSubCommands.RedisSubscriber subscriber;

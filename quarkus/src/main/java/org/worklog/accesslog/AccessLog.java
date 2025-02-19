@@ -13,7 +13,7 @@ public class AccessLog {
     private String deviceId;
     @JsonProperty("employee_id")
     private String employeeId;
-    @JsonProperty("employee_id")
+    @JsonProperty("employee_")
     private String employeeName;
     private LocalDate date;
     private LocalTime time;
