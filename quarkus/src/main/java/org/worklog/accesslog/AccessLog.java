@@ -3,7 +3,11 @@ package org.worklog.accesslog;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.hibernate.search.engine.backend.types.Sortable;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.DocumentId;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.SearchEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,16 +15,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @SearchEntity
 @Indexed
 public class AccessLog {
+    @DocumentId
     private Long id;
     @JsonProperty("card_id")
     private String cardId;
+    @KeywordField
     @JsonProperty("device_id")
     private String deviceId;
+    @KeywordField
     @JsonProperty("employee_id")
     private String employeeId;
     @JsonProperty("employee_name")
     private String employeeName;
+    @GenericField(sortable = Sortable.YES)
     private LocalDate date;
+    @GenericField(sortable = Sortable.YES)
     private LocalTime time;
     private AccessType type;
 
