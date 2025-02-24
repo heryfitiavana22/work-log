@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.DocumentId;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
@@ -17,20 +18,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AccessLog {
     @DocumentId
     private Long id;
+
+    @FullTextField(analyzer = "edge_ngram_analyzer")
     @JsonProperty("card_id")
     private String cardId;
+
     @KeywordField
     @JsonProperty("device_id")
     private String deviceId;
+
     @KeywordField
     @JsonProperty("employee_id")
     private String employeeId;
+
+    @FullTextField(analyzer = "edge_ngram_analyzer")
     @JsonProperty("employee_name")
     private String employeeName;
+
     @GenericField(sortable = Sortable.YES)
     private LocalDate date;
+
     @GenericField(sortable = Sortable.YES)
     private LocalTime time;
+
+    @GenericField(sortable = Sortable.YES)
     private AccessType type;
 
     public AccessLog() {
