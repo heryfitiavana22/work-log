@@ -1,7 +1,7 @@
 package org.worklog.accesslog;
 
-import org.worklog.elasticsearch.CreateSessionSearchException;
 import org.worklog.elasticsearch.ElascticsearchSession;
+import org.worklog.elasticsearch.exception.CreateSessionSearchException;
 
 public class AccessLogService extends ElascticsearchSession {
 

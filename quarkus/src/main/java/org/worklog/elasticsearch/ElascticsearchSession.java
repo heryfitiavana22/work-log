@@ -2,6 +2,7 @@ package org.worklog.elasticsearch;
 
 import org.hibernate.search.mapper.pojo.standalone.mapping.SearchMapping;
 import org.hibernate.search.mapper.pojo.standalone.session.SearchSession;
+import org.worklog.elasticsearch.exception.CreateSessionSearchException;
 
 import jakarta.inject.Inject;
 
