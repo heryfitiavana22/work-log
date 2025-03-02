@@ -1,4 +1,4 @@
-package org.worklog.elasticsearch;
+package org.worklog.elasticsearch.analyser;
 
 import org.hibernate.search.backend.elasticsearch.analysis.ElasticsearchAnalysisConfigurationContext;
 import org.hibernate.search.backend.elasticsearch.analysis.ElasticsearchAnalysisConfigurer;
