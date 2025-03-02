@@ -2,6 +2,7 @@ package org.worklog.redis;
 
 import java.util.function.Consumer;
 
+import org.worklog.accesslog.AccessLogService;
 import org.worklog.filebeat.FilebeatData;
 
 import io.quarkus.redis.datasource.RedisDataSource;
@@ -12,11 +13,14 @@ import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.infrastructure.Infrastructure;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 @Startup
 @Blocking
 public class RedisSubscriber implements Consumer<FilebeatData> {
+    @Inject
+    private AccessLogService accessLogService;
     private final PubSubCommands<FilebeatData> pub;
     private final PubSubCommands.RedisSubscriber subscriber;
 
