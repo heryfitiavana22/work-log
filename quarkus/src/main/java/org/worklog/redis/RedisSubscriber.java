@@ -2,7 +2,9 @@ package org.worklog.redis;
 
 import java.util.function.Consumer;
 
+import org.worklog.accesslog.AccessLog;
 import org.worklog.accesslog.AccessLogService;
+import org.worklog.elasticsearch.exception.CreateSessionSearchException;
 import org.worklog.filebeat.FilebeatData;
 
 import io.quarkus.redis.datasource.RedisDataSource;
@@ -35,7 +37,12 @@ public class RedisSubscriber implements Consumer<FilebeatData> {
                 .runSubscriptionOn(Infrastructure.getDefaultWorkerPool())
                 .subscribe().with(notif -> {
                     System.out.println(notif.getJsonFromCsv());
-                    // TODO: send to elasticsearch
+                    AccessLog accessLog = notif.getJsonFromCsv();
+                    try {
+                        accessLogService.save(accessLog);
+                    } catch (CreateSessionSearchException e) {
+                        e.printStackTrace();
+                    }
                 }, failure -> {
                     failure.printStackTrace();
                 });

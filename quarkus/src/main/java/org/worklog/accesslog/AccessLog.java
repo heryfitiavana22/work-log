@@ -13,7 +13,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.SearchEnti
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SearchEntity
+@SearchEntity(name = "access-log")
 @Indexed
 public class AccessLog {
     @DocumentId
