@@ -1,7 +1,6 @@
 package org.worklog.accesslog;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.DocumentId;
@@ -36,10 +35,7 @@ public class AccessLog {
     private String employeeName;
 
     @GenericField(sortable = Sortable.YES)
-    private LocalDate date;
-
-    @GenericField(sortable = Sortable.YES)
-    private LocalTime time;
+    public ZonedDateTime timestamp;
 
     @GenericField(sortable = Sortable.YES)
     private AccessType type;
@@ -47,15 +43,14 @@ public class AccessLog {
     public AccessLog() {
     }
 
-    public AccessLog(Long id, String cardId, String deviceId, String employeeId, String employeeName, LocalDate date,
-            LocalTime time, AccessType type) {
+    public AccessLog(Long id, String cardId, String deviceId, String employeeId, String employeeName,
+            ZonedDateTime timestamp, AccessType type) {
         this.id = id;
         this.cardId = cardId;
         this.deviceId = deviceId;
         this.employeeId = employeeId;
         this.employeeName = employeeName;
-        this.date = date;
-        this.time = time;
+        this.timestamp = timestamp;
         this.type = type;
     }
 
@@ -99,20 +94,12 @@ public class AccessLog {
         this.employeeName = employeeName;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public ZonedDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setTimestamp(ZonedDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     public AccessType getType() {
@@ -131,8 +118,7 @@ public class AccessLog {
                 ", deviceId='" + deviceId + '\'' +
                 ", employeeId='" + employeeId + '\'' +
                 ", employeeName='" + employeeName + '\'' +
-                ", date=" + date +
-                ", time=" + time +
+                ", timestamp=" + timestamp +
                 ", type=" + type +
                 '}';
     }
