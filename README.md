@@ -9,7 +9,7 @@ This project is a real-time employee attendance tracking system. It collects ent
 ## Technology Stack
 - `Filebeat` monitors the CSV file and sends new log entries to Redis.
 
-- `Redis` acts as a message broker, triggering events for new transactions.
+- `Redis` acts as a message broker, triggering events for new data.
 
 - `Quarkus` listens to Redis events, processes the data, and indexes it in Elasticsearch.
 

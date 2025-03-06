@@ -11,15 +11,24 @@ public class AccessLogGenerator {
 
     private static final Random RANDOM = new Random();
 
-    private AccessLog generateRandom(ZonedDateTime dateTransaction) {
+    private AccessLog generateRandom(ZonedDateTime date) {
         Long id = RANDOM.nextLong();
         String cardId = "card-" + RANDOM.nextInt(1000);
         String deviceId = "device-" + RANDOM.nextInt(1000);
         String employeeId = "employee-" + RANDOM.nextInt(1000);
         String employeeName = "Employee" + RANDOM.nextInt(1000);
-        ZonedDateTime timestamp = dateTransaction;
+        ZonedDateTime timestamp = date;
         AccessType type = AccessType.values()[RANDOM.nextInt(AccessType.values().length)];
         return new AccessLog(id, cardId, deviceId, employeeId, employeeName, timestamp, type);
+    }
+
+    public void startGeneratingPast(int count) {
+        for (int i = 0; i < count; i++) {
+            AccessLog accessLog = generatePastRandom();
+            // TODO: append data to csv
+            System.out.println("Generated accessLog: " + accessLog);
+
+        }
     }
 
     private AccessLog generateNowRandom() {
