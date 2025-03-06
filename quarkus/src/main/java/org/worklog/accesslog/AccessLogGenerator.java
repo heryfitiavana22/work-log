@@ -4,14 +4,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class AccessLogGenerator {
     private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
 
     private static final Random RANDOM = new Random();
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 
     private AccessLog generateRandom(ZonedDateTime dateTransaction) {
         Long id = RANDOM.nextLong();
