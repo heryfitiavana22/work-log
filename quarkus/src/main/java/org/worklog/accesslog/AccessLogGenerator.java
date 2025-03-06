@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class AccessLogGenerator {
     private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
-    
+
     private static final Random RANDOM = new Random();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 
@@ -22,6 +22,13 @@ public class AccessLogGenerator {
         ZonedDateTime timestamp = dateTransaction;
         AccessType type = AccessType.values()[RANDOM.nextInt(AccessType.values().length)];
         return new AccessLog(id, cardId, deviceId, employeeId, employeeName, timestamp, type);
+    }
+
+    private ZonedDateTime generatePastRandomDate() {
+        LocalDateTime start = LocalDateTime.now().minusMonths(1);
+        LocalDateTime end = LocalDateTime.now();
+
+        return generateRandomDateWithRage(start, end);
     }
     
     private ZonedDateTime generateRandomDateWithRage(LocalDateTime start, LocalDateTime end) {
