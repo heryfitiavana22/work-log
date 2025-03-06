@@ -31,6 +31,10 @@ public class AccessLogGenerator {
         }
     }
 
+    public void startGeneratingNow(int minInterval, int maxInterval) {
+        // TODO
+    }
+
     private AccessLog generateNowRandom() {
         return generateRandom(ZonedDateTime.now());
     }
