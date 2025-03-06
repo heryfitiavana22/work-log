@@ -24,13 +24,21 @@ public class AccessLogGenerator {
         return new AccessLog(id, cardId, deviceId, employeeId, employeeName, timestamp, type);
     }
 
+    private AccessLog generateNowRandom() {
+        return generateRandom(ZonedDateTime.now());
+    }
+
+    private AccessLog generatePastRandom() {
+        return generateRandom(generatePastRandomDate());
+    }
+
     private ZonedDateTime generatePastRandomDate() {
         LocalDateTime start = LocalDateTime.now().minusMonths(1);
         LocalDateTime end = LocalDateTime.now();
 
         return generateRandomDateWithRage(start, end);
     }
-    
+
     private ZonedDateTime generateRandomDateWithRage(LocalDateTime start, LocalDateTime end) {
         long startEpoch = start.toEpochSecond(ZoneOffset.UTC);
         long endEpoch = end.toEpochSecond(ZoneOffset.UTC);
