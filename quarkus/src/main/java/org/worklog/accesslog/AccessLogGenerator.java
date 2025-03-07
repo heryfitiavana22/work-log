@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class AccessLogGenerator {
     private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
@@ -36,6 +37,13 @@ public class AccessLogGenerator {
             AccessLog accessLog = generateNowRandom();
             // TODO: append data to csv
             System.out.println("Generated accessLog: " + accessLog);
+
+            try {
+                int interval = RANDOM.nextInt(maxInterval - minInterval + 1) + minInterval;
+                TimeUnit.SECONDS.sleep(interval);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
     }
