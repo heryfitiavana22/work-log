@@ -35,7 +35,7 @@ public class AccessLogGenerator {
         for (int i = 0; i < count; i++) {
             AccessLog accessLog = generatePastRandom();
             dataCsvService.appendToCSV(accessLog);
-            System.out.println("Generated accessLog: " + accessLog);
+            System.out.println("Generated Past accessLog: " + accessLog);
 
         }
     }
