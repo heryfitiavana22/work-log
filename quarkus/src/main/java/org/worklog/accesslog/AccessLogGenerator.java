@@ -32,7 +32,12 @@ public class AccessLogGenerator {
     }
 
     public void startGeneratingNow(int minInterval, int maxInterval) {
-        // TODO
+        while (true) {
+            AccessLog accessLog = generateNowRandom();
+            // TODO: append data to csv
+            System.out.println("Generated accessLog: " + accessLog);
+        }
+
     }
 
     private AccessLog generateNowRandom() {
