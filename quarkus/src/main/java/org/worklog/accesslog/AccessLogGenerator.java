@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Random;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class AccessLogGenerator {
@@ -33,19 +34,20 @@ public class AccessLogGenerator {
     }
 
     public void startGeneratingNow(int minInterval, int maxInterval) {
-        while (true) {
-            AccessLog accessLog = generateNowRandom();
-            // TODO: append data to csv
-            System.out.println("Generated accessLog: " + accessLog);
+        Executors.newSingleThreadExecutor().execute(() -> {
+            while (true) {
+                AccessLog accessLog = generateNowRandom();
+                // TODO: append data to csv
+                System.out.println("Generated accessLog: " + accessLog);
 
-            try {
-                int interval = RANDOM.nextInt(maxInterval - minInterval + 1) + minInterval;
-                TimeUnit.SECONDS.sleep(interval);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+                try {
+                    int interval = RANDOM.nextInt(maxInterval - minInterval + 1) + minInterval;
+                    TimeUnit.SECONDS.sleep(interval);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
-        }
-
+        });
     }
 
     private AccessLog generateNowRandom() {
