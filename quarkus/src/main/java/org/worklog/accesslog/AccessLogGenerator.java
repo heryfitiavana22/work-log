@@ -8,10 +8,17 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.worklog.csv.DataCsvService;
+
 public class AccessLogGenerator {
+    private final DataCsvService dataCsvService;
     private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
 
     private static final Random RANDOM = new Random();
+
+    public AccessLogGenerator(DataCsvService dataCsvService) {
+        this.dataCsvService = dataCsvService;
+    }
 
     private AccessLog generateRandom(ZonedDateTime date) {
         Long id = RANDOM.nextLong();
@@ -27,7 +34,7 @@ public class AccessLogGenerator {
     public void startGeneratingPast(int count) {
         for (int i = 0; i < count; i++) {
             AccessLog accessLog = generatePastRandom();
-            // TODO: append data to csv
+            dataCsvService.appendToCSV(accessLog);
             System.out.println("Generated accessLog: " + accessLog);
 
         }
@@ -37,7 +44,7 @@ public class AccessLogGenerator {
         Executors.newSingleThreadExecutor().execute(() -> {
             while (true) {
                 AccessLog accessLog = generateNowRandom();
-                // TODO: append data to csv
+                dataCsvService.appendToCSV(accessLog);
                 System.out.println("Generated accessLog: " + accessLog);
 
                 try {
