@@ -5,7 +5,7 @@ import org.worklog.accesslog.AccessLogGenerator;
 import io.quarkus.runtime.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 
-// @Startup
+@Startup
 @ApplicationScoped
 public class DataFakeGenerator {
     private AccessLogGenerator accessLogGenerator;
