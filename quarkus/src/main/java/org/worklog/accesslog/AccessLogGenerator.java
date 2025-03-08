@@ -24,7 +24,7 @@ public class AccessLogGenerator {
     }
 
     private AccessLog generateRandom(ZonedDateTime date) {
-        Long id = RANDOM.nextLong();
+        Long id = Math.abs(RANDOM.nextLong());
         String cardId = "card-" + RANDOM.nextInt(1000);
         String deviceId = "device-" + RANDOM.nextInt(1000);
         String employeeId = "employee-" + RANDOM.nextInt(1000);
