@@ -6,6 +6,9 @@ This project is a real-time employee attendance tracking system. It collects ent
 
 ![Project Flow](./flow.png)
 
+## Grafana demo
+
+
 ## Technology Stack
 - `Filebeat` monitors the CSV file and sends new log entries to Redis.
 
