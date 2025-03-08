@@ -3,6 +3,7 @@ package org.worklog.csv;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.worklog.accesslog.AccessLog;
@@ -15,6 +16,16 @@ public class DataCsvService {
 
     public DataCsvService() {
         this.csvFilePath = Paths.get(System.getProperty("user.dir"), "..", "db.csv").toString();
+        if (!Files.exists(Paths.get(csvFilePath))) {
+            try {
+                Files.createFile(Paths.get(csvFilePath));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath));
+                writer.write("id,card_id,device_id,employee_id,employee_name,timestamp,type\n");
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void appendToCSV(AccessLog accessLog) {
