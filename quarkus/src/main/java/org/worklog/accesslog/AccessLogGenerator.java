@@ -10,6 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.worklog.csv.DataCsvService;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class AccessLogGenerator {
     private final DataCsvService dataCsvService;
     private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
