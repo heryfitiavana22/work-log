@@ -7,10 +7,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @Startup
 @ApplicationScoped
-public class DataFakeGenerator {
+public class DataFakeGeneratorStartup {
     private AccessLogGenerator accessLogGenerator;
 
-    public DataFakeGenerator(AccessLogGenerator accessLogGenerator) {
+    public DataFakeGeneratorStartup(AccessLogGenerator accessLogGenerator) {
         this.accessLogGenerator = accessLogGenerator;
         accessLogGenerator.startGeneratingPast(100);
         accessLogGenerator.startGeneratingNow(1, 10);
