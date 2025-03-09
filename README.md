@@ -8,7 +8,15 @@ This project is a real-time employee attendance tracking system. It collects ent
 
 ## Grafana demo
 
-[grafana-demo.webm](https://github.com/user-attachments/assets/a9c983a3-6f58-46eb-a96f-dc03eb404cdb)
+[table.webm](https://github.com/user-attachments/assets/e4d552e4-61bb-4a69-926d-70e9e33b1b27)
+
+
+[count-by-type-per-interval-time.webm](https://github.com/user-attachments/assets/28fc1e5e-c942-4f5f-8073-305a6766fdbf)
+
+
+
+[count-all.webm](https://github.com/user-attachments/assets/2bd33db5-56ea-4ded-a552-9906751923ef)
+
 
 ## Technology Stack
 - `Filebeat` monitors the CSV file and sends new log entries to Redis.
