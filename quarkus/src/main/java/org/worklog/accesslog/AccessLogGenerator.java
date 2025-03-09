@@ -4,19 +4,23 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.worklog.csv.DataCsvService;
 
+import com.github.javafaker.Faker;
+
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class AccessLogGenerator {
     private final DataCsvService dataCsvService;
-    private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
+    private final ZoneId zoneId = ZoneId.of("Africa/Nairobi");
     private final String[] devices = { "device-01", "device-02", "device-03" };
+    private final Faker faker = new Faker(new Locale("fr"));
 
     private static final Random RANDOM = new Random();
 
@@ -28,8 +32,8 @@ public class AccessLogGenerator {
         Long id = Math.abs(RANDOM.nextLong());
         String cardId = "card-" + RANDOM.nextInt(1000);
         String deviceId = devices[RANDOM.nextInt(devices.length)];
-        String employeeId = "" + RANDOM.nextInt(10000);
-        String employeeName = "Employee" + RANDOM.nextInt(1000);
+        String employeeId = faker.idNumber().valid();
+        String employeeName = faker.name().fullName();
         ZonedDateTime timestamp = date;
         AccessType type = AccessType.values()[RANDOM.nextInt(AccessType.values().length)];
         return new AccessLog(id, cardId, deviceId, employeeId, employeeName, timestamp, type);
