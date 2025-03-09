@@ -16,6 +16,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class AccessLogGenerator {
     private final DataCsvService dataCsvService;
     private ZoneId zoneId = ZoneId.of("Africa/Nairobi");
+    private final String[] devices = { "device-01", "device-02", "device-03" };
 
     private static final Random RANDOM = new Random();
 
@@ -26,8 +27,8 @@ public class AccessLogGenerator {
     private AccessLog generateRandom(ZonedDateTime date) {
         Long id = Math.abs(RANDOM.nextLong());
         String cardId = "card-" + RANDOM.nextInt(1000);
-        String deviceId = "device-" + RANDOM.nextInt(1000);
-        String employeeId = "employee-" + RANDOM.nextInt(1000);
+        String deviceId = devices[RANDOM.nextInt(devices.length)];
+        String employeeId = "" + RANDOM.nextInt(10000);
         String employeeName = "Employee" + RANDOM.nextInt(1000);
         ZonedDateTime timestamp = date;
         AccessType type = AccessType.values()[RANDOM.nextInt(AccessType.values().length)];
